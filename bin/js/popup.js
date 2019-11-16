@@ -1,7 +1,7 @@
 const itemList = document.getElementById("listOfItems")
 const position = "beforeend"
 let website 
-let helpMessage = "<p class='helpMessage'>Right click on an element and select ' Send Element to Clicker '</p>"
+let helpMessage = "<p class='helpMessage'>Right click on an element and select <br/>'Send Element to Clicker'</p>"
 let unavailableMessage = "<p class='helpMessage'>Sorry we only work with http sites, if that bothers you please leave feadback ;), so we can improve the extension <br/> <b>Try reloading the page</b></p>"
 
 
@@ -107,6 +107,7 @@ function loadItems(){
                 let content = JSON.parse(itemData[website])
                 for (let [itemNr, item] of Object.entries(content)){
                     let clickerItem = `<div class="clickItem ${itemNr}">
+                    <div class='clickItemContainer'>
                     <div class="startStop ${item.active? "Active" : ""}" >
                         <div class="buttonSizer ${item.active? "Active" : ""}"></div>
                     </div>
@@ -123,6 +124,7 @@ function loadItems(){
                             <option ${item.intervalStep == "ms"? "Selected='selected'":""} value="ms">ms</option>
                             <option ${item.intervalStep == "s"? "Selected='selected'":""} value="s">s</option>
                     </select>
+                    </div>
                     </div>
                     </div>`
                     
