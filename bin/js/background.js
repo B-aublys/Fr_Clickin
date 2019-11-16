@@ -1,15 +1,15 @@
 
 // Clear moemory on new update 
 // TODO: make a smart fix....
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.local.clear();
+browser.runtime.onInstalled.addListener(function() {
+  browser.storage.local.clear();
   });
 
 
 
 // Log if there was an error creating the context item
 function onCreate(){
-  if (chrome.runtime.lastError){
+  if (browser.runtime.lastError){
     onError(browser.runtime.lastError)
   } else {
     console.log("Context Item Created Successfully")
@@ -22,16 +22,16 @@ function onError(err){
  
 
 //Create the context Item that selects elements for the clicker
-chrome.contextMenus.create({
+browser.contextMenus.create({
     id: "SelectElementForClicker",
     title: "~~[ Send Element to Clicker ]~~",
     contexts: ["all"]
   }, onCreate())
 
-chrome.contextMenus.onClicked.addListener((info, tab) =>{
+browser.contextMenus.onClicked.addListener((info, tab) =>{
   switch (info.menuItemId){
     case "SelectElementForClicker":
-      chrome.tabs.sendMessage(tab.id, {"ID": "selected"})
+      browser.tabs.sendMessage(tab.id, {"ID": "selected"})
       break
   }
 })

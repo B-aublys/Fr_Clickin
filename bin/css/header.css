@@ -1,0 +1,31 @@
+header{
+    background-color:rgb(236, 236, 236);
+    height: 32px;
+}
+
+header h1{
+    float: left;
+    margin-left: 10px;
+    color: rgb(49, 37, 45);
+}
+
+header a{
+    float: right;
+    margin-right:10px;
+    padding: 7px 0px 5px 0px;
+    min-width: 70px;
+    color: rgb(49, 37, 45);
+    border-right: 2px solid #5c7072;
+    border-bottom: 2px solid #5c7072;
+    font-size: 15px;
+    font-weight: 400;
+
+    background-color: #a0a0a0;
+    text-align: center;
+    text-decoration: none;
+}
+
+header a.active{
+    border-bottom: #96b8bb solid 2px;
+    border-right: #96b8bb solid 2px;
+}

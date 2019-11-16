@@ -77,7 +77,7 @@ function evaluateXPath(aNode, aExpr) {
 
 // FIXME: rename this function to something comprehensive
 function getClickers(){
-	chrome.storage.local.get([window.location.hostname], clickerObjectJSON => {
+	browser.storage.local.get([window.location.hostname], clickerObjectJSON => {
 		if(clickerObjectJSON[window.location.hostname]){
 			let clickerObject = JSON.parse(clickerObjectJSON[window.location.hostname])
 			for (let [clickerNr, clicker]  of Object.entries(clickerObject)){
@@ -165,7 +165,7 @@ function WriteNewClicker(message){
 	  "active": false
 	}
 
-	chrome.storage.local.get(window.location.hostname, response => {
+	browser.storage.local.get(window.location.hostname, response => {
 	  if (response[window.location.hostname]){
 		let responseValue = JSON.parse(response[window.location.hostname])
 		
@@ -187,15 +187,15 @@ function WriteNewClicker(message){
 		let clickerID = generateNewClickerID(currentClickerIDlist, 5)
 	  // If there are no duplicates add the new item to the list
 	  responseValue[clickerID] = newClicker
-	  chrome.storage.local.set({[window.location.hostname]: JSON.stringify(responseValue)})
+	  browser.storage.local.set({[window.location.hostname]: JSON.stringify(responseValue)})
 	  
 	  } else {
 		let clickerID = generateNewClickerID(currentClickerIDlist, 5)  
-		chrome.storage.local.set({[window.location.hostname]: JSON.stringify({[clickerID]: newClicker})})
+		browser.storage.local.set({[window.location.hostname]: JSON.stringify({[clickerID]: newClicker})})
 	  } 
 	})
 }
 
 document.addEventListener("mousedown", event => elementObject = event.target);
-chrome.runtime.onMessage.addListener(messageHandler)
+browser.runtime.onMessage.addListener(messageHandler)
 getClickers()
