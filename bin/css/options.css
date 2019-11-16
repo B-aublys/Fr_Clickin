@@ -1,0 +1,60 @@
+.singleButton {
+    margin: 5px;
+    height: 30px;
+    width: 300px;
+    border-radius: 3px;
+
+    background-color: rgb(219, 219, 219);
+}
+
+.singleButton h3{
+    position: relative;
+
+    font-size: 15px;
+    padding: 7px;
+    float: left;
+}
+
+#clearButton {
+    height: 20px;
+    width: 50px;
+    float: right;
+    margin: 4px 5px 0px 0px;
+
+
+    color: rgb(167, 54, 54);
+    border-radius: 3px;
+    border: 2px solid rgb(255, 144, 144);
+    text-align: center;
+    font-size: 15px;
+    background-color: rgb(255, 158, 158);
+    cursor: pointer;
+    transition: border 0.2s ease-out, color 0.2s ease-out;
+}
+
+#clearButton:hover {
+    border: 2px solid rgb(255, 109, 109);
+    color: rgb(148, 32, 32);
+}
+
+#nukeButton{
+    height: 20px;
+    width: 50px;
+    float: right;
+    margin: 4px 5px 0px 0px;
+
+
+    color: rgb(167, 54, 54);
+    border-radius: 3px;
+    border: 2px solid rgb(255, 144, 144);
+    text-align: center;
+    font-size: 15px;
+    background-color: rgb(255, 158, 158);
+    cursor: pointer;
+    transition: border 0.2s ease-out, color 0.2s ease-out;
+}
+
+#nukeButton:hover {
+    border: 2px solid rgb(255, 109, 109);
+    color: rgb(148, 32, 32);
+}
