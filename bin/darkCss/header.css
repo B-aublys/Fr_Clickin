@@ -1,0 +1,38 @@
+@import url(default.css);
+
+header{
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.3);
+    height: 25px;
+    border-radius: 4px;
+}
+
+/* Add a logo pointing right */
+/* for later to point at a donation link */
+
+h1{
+    float:left;
+    font-size: 15px;
+    padding: 7px 0 0 7px;
+    color: var(--textWhite)
+}
+
+.headerButton{
+    display: block;
+    float: right; 
+    padding: 6px 10px 0px 10px; 
+    height: 19px;
+
+    text-decoration: none;
+    color: var(--textWhite);
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+.headerButton.active, .headerButton:hover{
+    color: var(--textWhite);
+    background-color: rgba(255,255,255,0.07)
+}
+
