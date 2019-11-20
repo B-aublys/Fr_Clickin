@@ -63,24 +63,33 @@ div.clickItem{
 }
 
 .intervalHolder{
+    display: flex;
     flex: 1 0 60px;
     color: var(--textWhite);
     font-size: 13px;
     padding: 5px 0 0 10px;
 }
 
+.intervalHolder span{
+    margin-top: px;
+}
+
 .interval{
+    margin: 0px 5px;
     border-radius: 4px;
     display: inline-block;
-    text-align: center;
+    text-align: right;
+    overflow:hidden; 
+    white-space: nowrap;  
 
     font-size: 14px;
     font-weight: 500;
-    padding: 2px;
-    width: 60px;
+    padding: 4px;
+    width: 40px;
     color: var(--textGrey);
     transition: color 0.2s ease-out, background-color 0.2s ease-out;
 }
+
 
 
 .deleteButton{

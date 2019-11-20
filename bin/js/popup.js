@@ -115,7 +115,7 @@ function loadItems(){
                         spellcheck="false" class="itemClassifier elevatingInput">${item.name? item.name: "Unnamed"}</div>
                     
                     <div class="intervalHolder">
-                        Int:
+                        <span>Int:</span>
                         <div contentEditable class="interval elevatingInput">
                         ${item.interval}
                         </div>

@@ -120,6 +120,8 @@ function removeClicker(clickerID){
 }
 
 function startClicker(clickerID, clickerObject){
+	let elementToClick
+
 	if (clickerObject.active){
 		console.log("trying to start clicker")
 		let interval = clickerObject.interval
@@ -127,20 +129,21 @@ function startClicker(clickerID, clickerObject){
 			interval *= 1000
 		}
 		if (clickerObject.elemID){
-			let element = document.getElementById(clickerObject.elemID)
-			console.log("adding by id")
-			console.log(clickerID)
-			clickers[clickerID] = (setInterval(() => element.click(), parseInt(interval)))
+			elementToClick = document.getElementById(clickerObject.elemID)
 		} else {
 			let xpathObjects = evaluateXPath(clickerObject.relativeID ? document.getElementById(clickerObject.relativeID) : document, clickerObject.xpath)
 
-			//TODO: If xpath finds more than one, panic:
+
+			//TODO: more than 1 xpath handling
 			if (xpathObjects.length > 1) {
-				console.log("adding by xpath")
-				clickers[clickerID] = (setInterval(() => xpathObjects[0].click(), parseInt(interval)))
+				elementToClick = xpathObjects[0]
+				
 			} else {
 				console.log("xpath found more that 1 object")
 			}
+		}
+		if (elementToClick){
+			clickers[clickerID] = (setInterval(() => elementToClick.click(), parseInt(interval)))
 		}
 	}
 	console.log(clickers)	
