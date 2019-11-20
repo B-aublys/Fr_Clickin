@@ -2,7 +2,7 @@
     --darkGrey: #202020;
     --white: #fff;
     --textWhite: rgba(240, 240, 240);
-    --textGrey: rgba(120,120,120);
+    --textGrey: rgba(130,130,130);
 }
 
 @font-face{
@@ -21,4 +21,19 @@
 
 body{
     background-color: var(--darkGrey);
+    min-height: 60px;
+    width: 500px;
+    min-height: 50px;
+}
+
+
+.elevatingInput{
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+    color: var(--textGrey);
+}
+
+.elevatingInput:hover, .elevatingInput:focus {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--textWhite);
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.3);
 }

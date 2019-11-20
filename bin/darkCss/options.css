@@ -1,18 +1,19 @@
+@import url(default.css);
+@import url(header.css);
+
+
 .singleButton {
-    background-color: var(--exlightBvis);
+    background-color: rgba(255,255,255,0.06);
+    color: var(--textWhite);
     margin-left: 5px;
-    width: 300px;
     height: 30px;
     border-radius: 5px;
-    border: solid 1px var(--b);
     margin-top: 5px;
 }
 
 
 .singleButton h3{
-    position: relative;
-
-    font-size: 15px;
+    font-size: 13px;
     margin-top: 2px;
     padding: 7px;
     float: left;
@@ -23,46 +24,17 @@
 }
 
 
-#clearButton {
-    height: 20px;
+.simpleOptionButton {
+    height: 18px;
     width: 50px;
     float: right;
     margin: 4px 5px 0px 0px;
-
-
-    color: rgb(167, 54, 54);
-    border-radius: 3px;
-    border: 2px solid rgb(255, 144, 144);
+    padding-top: 4px;
     text-align: center;
-    font-size: 15px;
-    background-color: rgb(255, 158, 158);
-    cursor: pointer;
-    transition: border 0.2s ease-out, color 0.2s ease-out;
-}
 
-#clearButton:hover {
-    border: 2px solid rgb(255, 109, 109);
-    color: rgb(148, 32, 32);
-}
-
-#nukeButton{
-    height: 20px;
-    width: 50px;
-    float: right;
-    margin: 4px 5px 0px 0px;
-
-
-    color: rgb(167, 54, 54);
     border-radius: 3px;
-    border: 2px solid rgb(255, 144, 144);
-    text-align: center;
-    font-size: 15px;
-    background-color: rgb(255, 158, 158);
+    vertical-align: middle;
+    font-size: 14px;
     cursor: pointer;
-    transition: border 0.2s ease-out, color 0.2s ease-out;
 }
 
-#nukeButton:hover {
-    border: 2px solid rgb(255, 109, 109);
-    color: rgb(148, 32, 32);
-}

@@ -108,16 +108,15 @@ function loadItems(){
                 for (let [itemNr, item] of Object.entries(content)){
                     let clickerItem = `<div class="clickItem ${itemNr}">
                     <div class='clickItemContainer'>
-                    <div class="startStop ${item.active? "Active" : ""}" >
+                    <div class="startStop elevatingInput ${item.active? "Active" : ""}" >
                         <div class="buttonSizer ${item.active? "Active" : ""}"></div>
                     </div>
                     <div contentEditable autocomplete="off" autocorrect="off" autocapitalize="off"
-                        spellcheck="false" class="itemClassifier">${item.name? item.name: "Unnamed"}</div>
-                    <div class="deleteButton">
-                    </div>
+                        spellcheck="false" class="itemClassifier elevatingInput">${item.name? item.name: "Unnamed"}</div>
+                    
                     <div class="intervalHolder">
                         Int:
-                        <div contentEditable class="interval">
+                        <div contentEditable class="interval elevatingInput">
                         ${item.interval}
                         </div>
                         <select class="intervalDropDown">
@@ -125,6 +124,7 @@ function loadItems(){
                             <option ${item.intervalStep == "s"? "Selected='selected'":""} value="s">s</option>
                     </select>
                     </div>
+                    <div class="deleteButton elevatingInput"/>
                     </div>
                     </div>`
                     

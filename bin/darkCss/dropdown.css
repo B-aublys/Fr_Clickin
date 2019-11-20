@@ -1,3 +1,5 @@
+@import url(default.css);
+
 .intervalDropDown{
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -5,12 +7,16 @@
     /* background-image: url();   Add custom arrow */
 
 
-    border: 1px solid #ccc;
+    border: none;
     width: 40px;
     height: 20px;
     border-radius: 3px;
     overflow: hidden;
-    background: #fafafa;
+    background-color: rgba(0,0,0,0);
+    
+
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+    color: var(--textGrey);
 }
 
 .intervalDropDown select {
@@ -21,8 +27,18 @@
     background: transparent;
     background-image: none;
     -webkit-appearance: none;
+    
 }
 
 .intervalDropDown select:focus {
     outline: none;
+    background-color: rgba(255,255,255,0.1);
+
 }
+
+.intervalDropDown:hover{
+    background-color: rgba(255,255,255,0.1);
+    color: var(--textWhite);
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.3);
+}
+
