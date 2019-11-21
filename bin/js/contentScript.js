@@ -1,6 +1,6 @@
 // store the last clicked element
 let elementObject
-// array to store all the running clickers
+// array to store all the running clickers by their ID
 let clickers = {}
 
 function messageHandler(request, sender, sendResponse){
@@ -19,6 +19,10 @@ function messageHandler(request, sender, sendResponse){
 		
 		case "removeClicker":
 			removeClicker(request.clickerID)
+			break
+
+		case "removeClickers":
+			removeClickers()
 			break
 	}
 }
@@ -100,7 +104,6 @@ function generateNewClickerID(currentIDs, length){
 		}
 
 		if (currentIDs.indexOf(generated) == -1) {
-			console.log(generated)
 			return generated
 		}
 	}
@@ -108,22 +111,28 @@ function generateNewClickerID(currentIDs, length){
 
 
 function restartClicker(clicker){
-	// stop currently active clickers
 	let clickerID = Object.keys(clicker)[0]
-	console.log("clickerID:" + clickerID)
 	clearInterval(clickers[clickerID])
 	startClicker(clickerID, clicker[clickerID])
 }
+
+function removeClickers(){
+	for (let [clickerNr, clicker]  of Object.entries(clickers)){
+		removeClicker(clickerNr)
+	}
+}
+
 
 function removeClicker(clickerID){
 	clearInterval(clickers[clickerID])
 }
 
+// Find the element that needs to be clicked
+// creates a new entry in the clickers list
 function startClicker(clickerID, clickerObject){
 	let elementToClick
 
 	if (clickerObject.active){
-		console.log("trying to start clicker")
 		let interval = clickerObject.interval
 		if (clickerObject.intervalStep == "s"){
 			interval *= 1000
@@ -146,7 +155,6 @@ function startClicker(clickerID, clickerObject){
 			clickers[clickerID] = (setInterval(() => elementToClick.click(), parseInt(interval)))
 		}
 	}
-	console.log(clickers)	
 }
 
 
@@ -180,7 +188,6 @@ function WriteNewClicker(message){
 		  	if ((item["elemID"] == newClicker["elemID"] && newClicker["elemID"] != "") 
 			  || ((item["xpath"] == newClicker["xpath"] && newClicker['xpath'] != "") &&
 			  item["relativeID"] == newClicker["relativeID"] && newClicker["relativeID"] != "")){
-			console.log("popped")
 			return
 		  	}
 		}

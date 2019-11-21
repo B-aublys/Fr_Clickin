@@ -9,7 +9,7 @@ div.clickItem{
     margin-left: 5px;
     width: 490px;
     height: 30px;
-    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.3); 
     border-radius: 5px;
     margin-top: 5px;
 
@@ -71,7 +71,7 @@ div.clickItem{
 }
 
 .intervalHolder span{
-    margin-top: px;
+    margin-top: 6px;
 }
 
 .interval{
@@ -83,6 +83,7 @@ div.clickItem{
     white-space: nowrap;  
 
     font-size: 14px;
+    height: 12px;
     font-weight: 500;
     padding: 4px;
     width: 40px;

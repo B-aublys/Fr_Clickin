@@ -29,11 +29,12 @@ body{
 
 .elevatingInput{
     transition: background-color 0.2s ease-out, color 0.2s ease-out;
-    color: var(--textGrey);
+    background-color: rgba(255,255,255,0.08);
+    color: var(--textWhite);
+    transition: background-color 0.2s ease-out;
 }
 
-.elevatingInput{
-    background-color: rgba(255,255,255,0.1);
-    color: var(--textWhite);
+.elevatingInput:hover{
+    background-color: rgba(255,255,255,0.12);
     /* box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.3); */
 }

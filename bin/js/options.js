@@ -8,22 +8,22 @@ function deleteThisSitesData(){
             console.log(webResp)
             if(webResp){
                 browser.storage.local.remove(webResp["website"], ()=> console.log("Deleted" + webResp["website"]))
-                SendRestartClickersMessage(tabs[0])
+                SendRestartClickersMessage([tabs[0]])
             }
         })
     })
 }
 
 function nukeData() {
-    browser.storage.local.clear(() => console.log("deleted all Data"))
-    browser.tabs.query({currentWindow: true}, (tabs) => {
-        SendRestartClickersMessage(tabs)
-    })
+    browser.storage.local.clear(() => browser.tabs.query({currentWindow: true}, (tabs) => {
+        SendRestartClickersMessage(tabs)}))
 }
 
 function SendRestartClickersMessage(tabs){
+    
     for (tab of tabs){
-        browser.tabs.sendMessage(tab.id, {"ID": "restartClickers"})
+        console.log("sending restart message")
+        browser.tabs.sendMessage(tab.id, {"ID": "removeClickers"})
     }
 }
 
