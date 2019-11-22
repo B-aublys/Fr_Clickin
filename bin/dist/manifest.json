@@ -2,7 +2,7 @@
     "name": "Clickin",
     "version": "1.0.1",
     "description": "A simple to use autoclicker",
-    "author": "Baublys",
+    "author": "B-aublys",
     "permissions": ["storage", "contextMenus", "tabs"],
     "icons" :{
         "128": "./images/blue.png"
@@ -13,7 +13,7 @@
     },
     "browser_action": {
         "default_title": "Enable your clicking Powers!",
-        "default_popup": "./html/clicker.html"
+        "default_popup": "./clicker.html"
     },
     "content_scripts": [
         {
