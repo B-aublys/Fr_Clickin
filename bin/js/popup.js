@@ -33,7 +33,7 @@ function AddListeners(){
 
 
 function changeInterval(changedEvent){
-    let elemID = getClickItemID(changedEvent.target)
+    let clickerID = getClickItemID(changedEvent.target)
     let intervalValue = changedEvent.target.innerHTML.trim()
     let newValue = "" 
 
@@ -44,40 +44,41 @@ function changeInterval(changedEvent){
         changedEvent.target.innerHTML = newValue
     }
 
-    writeChange({interval: parseInt(newValue)}, elemID)
+    writeChange({interval: parseInt(newValue)}, clickerID)
 }
 
 function changeIntervalStep(changeEvent){
-    let elemID = getClickItemID(changeEvent.target)
-    writeChange({intervalStep: changeEvent.target.value}, elemID)
+    let clickerID = getClickItemID(changeEvent.target)
+    writeChange({intervalStep: changeEvent.target.value}, clickerID)
 }
 
 function changeItemClassifier(changedEvent){
-    let elemID = getClickItemID(changedEvent.target)
-    writeChange({name: changedEvent.target.innerHTML}, elemID)
+    let clickerID = getClickItemID(changedEvent.target)
+    writeChange({name: changedEvent.target.innerHTML}, clickerID)
 }
 
 // change = {key, value} of clicker
-function writeChange(change, elemID){
+function writeChange(change, clickerID){
 
     browser.storage.local.get(website, websiteData =>{
         let dataObject = JSON.parse(websiteData[website])
-        dataObject[elemID][Object.keys(change)[0]] = change[Object.keys(change)[0]]
-        let clicker = {[elemID]: dataObject[elemID]}
-        browser.storage.local.set({[website]: JSON.stringify(dataObject)}, () => restartClicker(clicker))
+        dataObject[clickerID][Object.keys(change)[0]] = change[Object.keys(change)[0]]
+        // TODO: delete this if it's not needed
+        // let clicker = {[clickerID]: dataObject[clickerID]}
+        browser.storage.local.set({[website]: JSON.stringify(dataObject)}, () => restartClicker(clickerID))
       })
 }
 
 
 function switchClicker(activationEvent){
-    let elemID = getClickItemID(activationEvent.target)
+    let clickerID = getClickItemID(activationEvent.target)
     
     // If clicker is turned off
     if(activationEvent.target.className.indexOf("Active") == -1){
-        writeChange({active: true}, elemID)
+        writeChange({active: true}, clickerID)
         activationEvent.target.className += " Active"
     } else {
-        writeChange({active: false}, elemID)
+        writeChange({active: false}, clickerID)
         activationEvent.target.className = activationEvent.target.className.replace("Active", "")
     }
 }
@@ -158,10 +159,11 @@ function deleteItem(elementToDelete){
     let deleteID = getClickItemID(elementToDelete)
     browser.storage.local.get(website, websiteItems =>{
         let items = JSON.parse(websiteItems[website])
-        let clicker = items[deleteID]
+        // TODO: check if this is needed
+        // let clicker = items[deleteID]
         delete items[deleteID]
         browser.storage.local.set({[website]: JSON.stringify(items)}, () => {
-            removeSignalContentScript(deleteID)
+            stopClickerSignalContentScript(deleteID)
             
             for(let [nr, child] of Object.entries(itemList.childNodes)){
                 if(child.tagName == "DIV"){
@@ -178,15 +180,16 @@ function deleteItem(elementToDelete){
     })
 } 
 
-function restartClicker(clicker){
+// Sends a restart signal to restart 1 clicker by it's ID
+function restartClicker(clickerID){
     browser.tabs.query({currentWindow: true, active: true }, tabsList => {
-    browser.tabs.sendMessage(tabsList[0].id, {"ID": "restartClicker", "clicker": clicker})
+    browser.tabs.sendMessage(tabsList[0].id, {"ID": "restartClicker", "clicker": clickerID})
     })
 }
 
-function removeSignalContentScript(deleteID){
+function stopClickerSignalContentScript(stopID){
     browser.tabs.query({currentWindow: true, active: true }, tabsList => {
-        browser.tabs.sendMessage(tabsList[0].id, {"ID": "removeClicker", "clickerID": deleteID})
+        browser.tabs.sendMessage(tabsList[0].id, {"ID": "stopClicker", "clickerID": stopID})
         })
 }
 

@@ -1,28 +1,37 @@
 // store the last clicked element
 let elementObject
 // array to store all the running clickers by their ID
+// {ID: clicker}
 let clickers = {}
 
+
+// Handles the incoming messages
 function messageHandler(request, sender, sendResponse) {
 	switch (request.ID) {
+
+		// Creates a new clicker
 		case "selected":
 			WriteNewClicker()
 			break
 
+		// sends back the website url
 		case "website":
 			sendResponse({ website: window.location.hostname })
 			break
 
+		// Restarts a single clicker based on ID
 		case "restartClicker":
-			restartClicker(request.clicker)
+			restartClicker(request.clickerID)
 			break
 
-		case "removeClicker":
-			removeClicker(request.clickerID)
+		// Stops a clicker based on ID
+		case "stopClicker":
+			stopClicker(request.clickerID)
 			break
 
-		case "removeClickers":
-			removeClickers()
+		// Stops all the clickers
+		case "stopClickers":
+			stopClickers()
 			break
 	}
 }
@@ -79,21 +88,23 @@ function evaluateXPath(aNode, aExpr) {
 }
 
 
-// FIXME: rename this function to something comprehensive
+// Runs all the clicekrs throught the start function when the site loads
+// To start the ones that were on when the user left the site
 function getClickers() {
 	browser.storage.local.get([window.location.hostname], clickerObjectJSON => {
 		if (clickerObjectJSON[window.location.hostname]) {
 			let clickerObject = JSON.parse(clickerObjectJSON[window.location.hostname])
-			for (let [clickerNr, clicker] of Object.entries(clickerObject)) {
-				if (clicker.active) {
-					startClicker(clickerNr, clicker)
-				}
+			for (let [clickerID, clicker] of Object.entries(clickerObject)) {
+				startClicker(clickerID, clicker)
 			}
 		}
 	})
 }
 
 
+// loops until it generates a unique 5 char long ID
+// checks the uniqueness agains the websites clickers,
+// not all clickers
 function generateNewClickerID(currentIDs, length) {
 	while (true) {
 		let generated = '';
@@ -103,6 +114,7 @@ function generateNewClickerID(currentIDs, length) {
 			generated = generated + characters.charAt(Math.floor(Math.random() * charactersLength));
 		}
 
+		// If there isn't any other IDs like it return it
 		if (currentIDs.indexOf(generated) == -1) {
 			return generated
 		}
@@ -110,20 +122,21 @@ function generateNewClickerID(currentIDs, length) {
 }
 
 
-function restartClicker(clicker) {
-	let clickerID = Object.keys(clicker)[0]
+// Restarts one clicker based of ID
+function restartClicker(clickerID) {
 	clearInterval(clickers[clickerID])
 	startClicker(clickerID, clicker[clickerID])
 }
 
-function removeClickers() {
-	for (let [clickerNr, clicker] of Object.entries(clickers)) {
-		removeClicker(clickerNr)
+// Stops all clickers 
+function stopClickers() {
+	for (let [clickerID, clicker] of Object.entries(clickers)) {
+		stopClicker(clickerID)
 	}
 }
 
-
-function removeClicker(clickerID) {
+// stops one clicker based on theirID
+function stopClicker(clickerID) {
 	clearInterval(clickers[clickerID])
 }
 
@@ -132,6 +145,7 @@ function removeClicker(clickerID) {
 function startClicker(clickerID, clickerObject) {
 	let elementToClick
 
+	// if the clic
 	if (clickerObject.active) {
 		let interval = clickerObject.interval
 		if (clickerObject.intervalStep == "s") {

@@ -19,7 +19,7 @@ function onCreate(){
 function onError(err){
   console.log(`Error: ${err}`)
 }
- 
+
 
 //Create the context Item that selects elements for the clicker
 browser.contextMenus.create({
@@ -28,6 +28,7 @@ browser.contextMenus.create({
     contexts: ["all"]
   }, onCreate())
 
+// listener for the click in the contect menue
 browser.contextMenus.onClicked.addListener((info, tab) =>{
   switch (info.menuItemId){
     case "SelectElementForClicker":
