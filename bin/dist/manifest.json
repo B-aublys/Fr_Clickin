@@ -9,16 +9,16 @@
     },
 
     "background":{
-        "scripts": ["./js/background.js"]
+        "scripts": ["./background.js"]
     },
     "browser_action": {
         "default_title": "Enable your clicking Powers!",
-        "default_popup": "./clicker.html"
+        "default_popup": "./web/clicker.html"
     },
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
-            "js": ["./js/contentScript.js"]
+            "js": ["./contentScript.js"]
         }
     ],
     "manifest_version": 2
