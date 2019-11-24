@@ -8,6 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "bin", "dist"),
         filename: "[name].bundle.js"
-    }
+    },
+    watch: true
 
 }
