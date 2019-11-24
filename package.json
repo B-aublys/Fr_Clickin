@@ -18,5 +18,8 @@
   "homepage": "https://github.com/B-aublys/Fr_Clickin#readme",
   "dependencies": {
     "webpack": "^4.41.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.10"
   }
 }
