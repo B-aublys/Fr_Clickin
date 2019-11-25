@@ -22,7 +22,7 @@ function nukeData() {
 function SendRestartClickersMessage(tabs){
     for (tab of tabs){
         console.log("sending restart message")
-        browser.tabs.sendMessage(tab.id, {"ID": "removeClickers"})
+        browser.tabs.sendMessage(tab.id, {"ID": "stopClickers"})
     }
 }
 

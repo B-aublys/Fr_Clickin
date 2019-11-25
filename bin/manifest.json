@@ -9,7 +9,7 @@
     },
 
     "background":{
-        "scripts": ["./js/background.js"]
+        "scripts": ["./dist/background.bundle.js"]
     },
     "browser_action": {
         "default_title": "Enable your clicking Powers!",
@@ -18,7 +18,7 @@
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
-            "js": ["./js/contentScript.js"]
+            "js": ["./dist/contentScript.bundle.js"]
         }
     ],
     "manifest_version": 2

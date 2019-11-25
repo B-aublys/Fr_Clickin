@@ -46,7 +46,7 @@ class deleteHandler{
     // Sends a message to the content script to stop a clicker
     removeSignalContentScript(deleteID){
         browser.tabs.query({currentWindow: true, active: true }, tabsList => {
-            browser.tabs.sendMessage(tabsList[0].id, {"ID": "removeClicker", "clickerID": deleteID})
+            browser.tabs.sendMessage(tabsList[0].id, {"ID": "stopClicker", "clickerID": deleteID})
             })
     }
 }
