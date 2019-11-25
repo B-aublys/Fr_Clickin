@@ -109,7 +109,7 @@ div.clickItem{
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(../images/redishtrash.svg);
+    background-image: url(../images/pinkbin.svg);
     transition: background-size .25s ease-out, background-color 0.2s ease-out, color 0.2s ease-out;;
 }
 

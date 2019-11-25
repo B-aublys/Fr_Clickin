@@ -144,11 +144,12 @@ function startClicker(clickerID, clickerObject){
 
 
 			//TODO: more than 1 xpath handling
-			if (xpathObjects.length > 1) {
+			if (xpathObjects.length < 2) {
 				elementToClick = xpathObjects[0]
 				
 			} else {
 				console.log("xpath found more that 1 object")
+				console.log(xpathObjects)
 			}
 		}
 		if (elementToClick){

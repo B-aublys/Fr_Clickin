@@ -15,9 +15,10 @@ class deleteHandler{
     // stops a clicker, removes it's entry from the local memory 
     // takes in the whole element that sent the delete message to use for deleting
     // the html element itsedeleteItem
-    deleteItem(elementToDeledeleteItem){
+    deleteItem(elementToDelete){
+        console.log("clicked")
         console.log("removindeleteItemitem")
-        let deleteID = getCldeleteItemkItemID(elementToDelete)
+        let deleteID = getClickItemID(elementToDelete)
         browser.storage.local.get(this.website, websiteItems =>{
             let items = JSON.parse(websiteItems[this.website])
             // TODO: find out if this is needed
