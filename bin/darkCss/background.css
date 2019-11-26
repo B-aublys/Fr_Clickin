@@ -118,7 +118,7 @@ div.clickItem{
 }
 
 
-.helpMessage{
+#helpMessage{
     text-align: center;
     margin: 30px;
     font-size: 15px;

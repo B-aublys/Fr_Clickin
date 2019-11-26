@@ -1,14 +1,15 @@
 import {changeHandler} from "./changeHandlers"
 import {deleteHandler} from "./deleteHandlers"
+import {writeAccordingMessage} from "./helpMessenger"
+
 
 const itemList = document.getElementById("listOfItems")
 const position = "beforeend"
 let website 
-let helpMessage = "<p class='helpMessage'>Right click on an element and select <br/>'Send Element to Clicker'</p>"
-let unavailableMessage = "<p class='helpMessage'>Sorry we only work with http sites, if that bothers you please leave feadback ;), so we can improve the extension <br/> <b>Try reloading the page</b></p>"
+// let helpMessage = "<p class='helpMessage'>Right click on an element and select <br/>'Send Element to Clicker'</p>"
+// let unavailableMessage = "<p class='helpMessage'>Sorry we only work with http sites, if that bothers you please leave feadback ;), so we can improve the extension <br/> <b>Try reloading the page</b></p>"
 
 function loadItems(){
-    let added = false
     browser.tabs.query({currentWindow: true, active: true}, (tabs) => {
         browser.tabs.sendMessage(tabs[0].id, {"ID": "website"}, webResp => {
             if(webResp){
@@ -43,22 +44,20 @@ function loadItems(){
                     // eToInsert.innerHTML = clickerItem
                     // itemList.appendChild(eToInsert)
                     itemList.insertAdjacentHTML(position, clickerItem)
-                    added = true
                     }
 
                     // Load the event handlers
                     let changeH = new changeHandler(website, itemList)
                     let deleteH = new deleteHandler(website, itemList)
-
-                }
-            if (!added){
-                itemList.parentElement.insertAdjacentHTML(position, helpMessage)
-                added = true
-            }
-            })
+                    
+                    writeAccordingMessage()
+                    } else {
+                        writeAccordingMessage()
+                    }
+                })
             } else {
-                itemList.parentElement.insertAdjacentHTML(position, unavailableMessage)
-                } 
+                writeAccordingMessage()
+            }
             }
         )
     })

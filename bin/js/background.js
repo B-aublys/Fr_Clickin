@@ -24,7 +24,7 @@ function onError(err){
 //Create the context Item that selects elements for the clicker
 browser.contextMenus.create({
     id: "SelectElementForClicker",
-    title: "~~[ Send Element to Clicker ]~~",
+    title: " Send Element to Clicker ",
     contexts: ["all"]
   }, onCreate())
 

@@ -1,5 +1,5 @@
 import {getClickItemID} from "./getClickItemID"
-
+import {writeAccordingMessage} from "./helpMessenger"
 
 class deleteHandler{
     constructor(website, itemList){
@@ -32,13 +32,8 @@ class deleteHandler{
                         if (child.classList[child.classList.length -1] == deleteID)
                             this.itemList.removeChild(child)
                         }
-                }
-                
-                //TODO: message handlera
-                // // if there are no more clickers, rerun the load command to print the help message
-                // if(itemList.childNodes.length == 1){
-                //     loadItems()
-                // }
+                    }
+                writeAccordingMessage()
             })
         })
     } 
