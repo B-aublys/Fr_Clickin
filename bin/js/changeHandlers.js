@@ -20,8 +20,6 @@ class changeHandler{
             element.getElementsByClassName("startStop")[0].
                 addEventListener("click", clickEvent => this.switchClicker(clickEvent))
         }
-
-        // document.getElementById("")
     }
 
 

@@ -63,4 +63,7 @@ function loadItems(){
     })
 }
 
+// Global starter and stoppers
+
+
 window.addEventListener("load", loadItems)
