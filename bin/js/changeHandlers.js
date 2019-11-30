@@ -20,6 +20,8 @@ class changeHandler{
             element.getElementsByClassName("startStop")[0].
                 addEventListener("click", clickEvent => this.switchClicker(clickEvent))
         }
+
+        // document.getElementById("")
     }
 
 
@@ -40,7 +42,7 @@ class changeHandler{
         this.writeChange({interval: parseInt(newValue)}, elemID, this.website)
     }
 
-    // use ms or s for the time interva;
+    // use ms or s for the time interval*;
     changeIntervalStep(changeEvent){
         let elemID = getClickItemID(changeEvent.target)
         this.writeChange({intervalStep: changeEvent.target.value}, elemID, this.website)

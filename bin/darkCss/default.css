@@ -28,7 +28,6 @@ body{
 
 
 .elevatingInput{
-    transition: background-color 0.2s ease-out, color 0.2s ease-out;
     background-color: rgba(255,255,255,0.08);
     color: var(--textWhite);
     transition: background-color 0.2s ease-out;

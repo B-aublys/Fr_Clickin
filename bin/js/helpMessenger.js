@@ -1,9 +1,7 @@
 function writeAccordingMessage(){
     let currentClickers = 0    
     const position = "beforeend"
-    const helpMessage = `<div id='helpMessage'>To add a clicker, right click on an element you want to click and send to the clicker </br>
-        P.S. We only work on HTTP and HTTPS sites.</div>
-    `  
+    const helpMessage = `<div id='helpMessage'></div>`
     const itemList = document.getElementById("listOfItems")
     console.log(typeof(itemList.childNodes))
     console.log(itemList)

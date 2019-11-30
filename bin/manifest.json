@@ -5,7 +5,7 @@
     "author": "Baublys",
     "permissions": ["storage", "contextMenus", "tabs"],
     "icons" :{
-        "128": "./images/blue.png"
+        "128": "./images/blueicon.png"
     },
 
     "background":{

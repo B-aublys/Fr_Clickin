@@ -33,7 +33,7 @@ div.clickItem{
     width: 23px;
 
     border-radius: 5px;
-    background-image: url(../images/greenPower.svg);
+    background-image: url(../images/greenPowerButton.svg);
 
     background-size: 15px;
     background-repeat: no-repeat;
@@ -42,7 +42,7 @@ div.clickItem{
 
 
 .startStop.Active{
-    background-image: url(../images/redPower.svg);
+    background-image: url(../images/redPowerButton.svg);
 }
 
 
@@ -120,7 +120,13 @@ div.clickItem{
 
 #helpMessage{
     text-align: center;
-    margin: 30px;
+    margin: 5px;
+    height: 150px;
     font-size: 15px;
     color: rgb(99, 99, 99);
+
+    background-size: 490px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/helpMessage.png);
 }
