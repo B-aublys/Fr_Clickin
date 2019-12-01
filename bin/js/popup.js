@@ -18,11 +18,9 @@ function loadItems(){
                 if(itemData[website]){
                 let content = JSON.parse(itemData[website])
                 for (let [itemNr, item] of Object.entries(content)){
-                    let clickerItem = `<div class="clickItem ${itemNr}">
+                    let clickerItem = `<div class="clickItem ${item.active? "Active" : ""} ${itemNr}">
                     <div class='clickItemContainer'>
-                    <div class="startStop elevatingInput ${item.active? "Active" : ""}" >
-                        <div class="buttonSizer ${item.active? "Active" : ""}"></div>
-                    </div>
+                    <div class="startStop elevatingInput "></div>
                     <div contentEditable autocomplete="off" autocorrect="off" autocapitalize="off"
                         spellcheck="false" class="itemClassifier elevatingInput">${item.name? item.name: "Unnamed"}</div>
                     
@@ -62,8 +60,6 @@ function loadItems(){
         )
     })
 }
-
-// Global starter and stoppers
 
 
 window.addEventListener("load", loadItems)

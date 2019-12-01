@@ -6,8 +6,8 @@ import {getClickItemID} from "./getClickItemID"
 class changeHandler{ 
     constructor(website, itemList){
         this.website = website 
-        this.itemList = itemList
-        for (let element of itemList.getElementsByClassName("clickItem")){
+        this.itemList = itemList.getElementsByClassName("clickItem")
+        for (let element of this.itemList){
             element.getElementsByClassName("interval")[0].
                 addEventListener("blur", changedEvent => this.changeInterval(changedEvent))
     
@@ -20,6 +20,12 @@ class changeHandler{
             element.getElementsByClassName("startStop")[0].
                 addEventListener("click", clickEvent => this.switchClicker(clickEvent))
         }
+
+        document.getElementById("parentStarter").
+            addEventListener("click", () => this.startAllClickers())
+
+            document.getElementById("parentStopper").
+            addEventListener("click", () => this.stopAllClickers())
     }
 
 
@@ -37,19 +43,21 @@ class changeHandler{
             changedEvent.target.innerHTML = newValue
         }
 
-        this.writeChange({interval: parseInt(newValue)}, elemID, this.website)
+        this.writeChange({interval: parseInt(newValue)}, elemID)
     }
 
     // use ms or s for the time interval*;
     changeIntervalStep(changeEvent){
         let elemID = getClickItemID(changeEvent.target)
-        this.writeChange({intervalStep: changeEvent.target.value}, elemID, this.website)
+        console.log(elemID)
+        console.log(changeEvent.target.value)
+        this.writeChange({intervalStep: changeEvent.target.value}, elemID)
     }
 
     // Change the name of the clicker
     changeItemClassifier(changedEvent){
         let elemID = getClickItemID(changedEvent.target)
-        this.writeChange({name: changedEvent.target.innerHTML}, elemID, this.website)
+        this.writeChange({name: changedEvent.target.innerHTML}, elemID)
     }
 
     // change = {key, value} of clicker in the local memory
@@ -67,16 +75,17 @@ class changeHandler{
 
     // Change the state of the clicker ON/OFF
     switchClicker(clickEvent){
-        let elemID = getClickItemID(clickEvent.target)
-        
+        let {parentElement, elemID} = getClickItemID(clickEvent.target, parent=true)
+        console.log("this is the parent")
+        console.log(parentElement)
         // If clicker is  off
-        if(clickEvent.target.className.indexOf("Active") == -1){
-            this.writeChange({active: true}, elemID, this.website)
-            clickEvent.target.className += " Active"
+        if(parentElement.className.indexOf("Active") == -1){
+            this.writeChange({active: true}, elemID)
+            parentElement.className = this.insertActive(parentElement.className)
         // If clicker is on
         } else {
-            this.writeChange({active: false}, elemID, this.website)
-            clickEvent.target.className = clickEvent.target.className.replace("Active", "")
+            this.writeChange({active: false}, elemID)
+            parentElement.className = parentElement.className.replace("Active", "")
         }
     }
 
@@ -85,6 +94,43 @@ class changeHandler{
         browser.tabs.query({currentWindow: true, active: true }, tabsList => {
         browser.tabs.sendMessage(tabsList[0].id, {"ID": "restartClicker", "clicker": clicker})
         })
+    }
+
+    // starts all the clickers
+    startAllClickers(){
+        for (let element of this.itemList){
+            let elemID = getClickItemID(element)
+            if (element.className.indexOf("Active") == -1){
+                console.log(element)
+                console.log(elemID)
+                this.writeChange({active: true}, elemID)
+                element.className = this.insertActive(element.className)
+
+            }
+        }
+    }
+
+    // stops all the clickers
+    stopAllClickers(){
+        console.log("Stopping all")
+        for (let element of this.itemList){
+            let elemID = getClickItemID(element)
+            console.log(element)
+            console.log(elemID)
+            console.log(element.className.indexOf("Active"))
+            if (element.className.indexOf("Active") != -1) {
+                console.log("executing")
+                this.writeChange({active: false}, elemID)
+                element.className = element.className.replace("Active", "")
+            }
+        }
+    }
+
+    // inserts  "Active" before the last work of the string
+    insertActive(classNames) {
+        classNames = classNames.split(" ")
+        classNames.splice(-1, 0, "Active")
+        return classNames.join(" ")
     }
 }
 

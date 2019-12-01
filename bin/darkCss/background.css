@@ -33,7 +33,7 @@ div.clickItem{
     width: 23px;
 
     border-radius: 5px;
-    background-image: url(../images/greenPowerButton.svg);
+    background-image: url(../images/greenishpower.svg);
 
     background-size: 15px;
     background-repeat: no-repeat;
@@ -41,8 +41,8 @@ div.clickItem{
 }
 
 
-.startStop.Active{
-    background-image: url(../images/redPowerButton.svg);
+.clickItem.Active .startStop{
+    background-image: url(../images/kindaRed.svg);
 }
 
 
@@ -109,7 +109,7 @@ div.clickItem{
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(../images/pinkbin.svg);
+    background-image: url(../images/greybin.svg);
     transition: background-size .25s ease-out, background-color 0.2s ease-out, color 0.2s ease-out;;
 }
 
@@ -118,7 +118,7 @@ div.clickItem{
 }
 
 
-#helpMessage{
+#helpImage{
     text-align: center;
     margin: 5px;
     height: 150px;
@@ -129,4 +129,12 @@ div.clickItem{
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(../images/helpMessage.png);
+}
+
+#helpMessage{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: var(--textWhite);
 }

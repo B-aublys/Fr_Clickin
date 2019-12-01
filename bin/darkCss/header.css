@@ -53,10 +53,10 @@ h1{
 
 
 #parentStarter{
-    background-image: url(../images/greenPowerButton.svg);
+    background-image: url(../images/greenishpower.svg);
 
 }
 
 #parentStopper{
-    background-image: url(../images/redPowerButton.svg);
+    background-image: url(../images/kindaRed.svg);
 }
