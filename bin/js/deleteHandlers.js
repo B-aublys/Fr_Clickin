@@ -16,8 +16,6 @@ class deleteHandler{
     // takes in the whole element that sent the delete message to use for deleting
     // the html element itsedeleteItem
     deleteItem(elementToDelete){
-        console.log("clicked")
-        console.log("removindeleteItemitem")
         let deleteID = getClickItemID(elementToDelete)
         browser.storage.local.get(this.website, websiteItems =>{
             let items = JSON.parse(websiteItems[this.website])

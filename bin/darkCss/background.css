@@ -8,7 +8,6 @@ div.clickItem{
     background-color: rgba(255, 255, 255, 0.06);
     margin-left: 5px;
     width: 490px;
-    height: 30px;
     box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.3); 
     border-radius: 5px;
     margin-top: 5px;
@@ -16,6 +15,8 @@ div.clickItem{
 }
 
 .clickItemContainer{
+    display: block;
+    height: 30px;
     display: flex;
     flex-direction: row;
     margin: 0px 5px;
@@ -100,21 +101,10 @@ div.clickItem{
     height: 23px;
 
     cursor: pointer;
-    font-size: 13px;
-    text-align: center;
-
-    cursor: pointer;
-    float: right;
-    
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(../images/greybin.svg);
-    transition: background-size .25s ease-out, background-color 0.2s ease-out, color 0.2s ease-out;;
-}
-
-.deleteButton:hover {
-    background-size: 18px;
 }
 
 
@@ -137,4 +127,103 @@ div.clickItem{
     margin-top: 10px;
     margin-bottom: 5px;
     color: var(--textWhite);
+}
+
+/* options dropdown */
+
+.arrow:active .dropDown{
+        display: block;
+        background-color: rgba(0, 0, 0, 0.20);
+        height:100px;
+        width: 100%;
+}
+
+.dropDownButton.Closed{
+    flex: 0 0 23px;
+    height: 23px;
+    margin-right: 2px;
+    margin-top: 3px;
+    border-radius: 3px;
+
+    cursor: pointer;
+    background-size: 13px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/arrow.svg);
+    transition: ease-in-out 0.2s;
+    transform: rotate(0deg);
+
+}
+
+.dropDownButton.Opened {
+    transition: ease-in-out 0.2s;
+    transform: rotate(90deg);
+}
+
+.dropDown{
+    height: 0;
+    transition: height 0.2s ease-out;
+    width: 100%;
+    overflow:hidden
+}
+
+.dropDown.Opened{
+    height: 30px;
+    transition: height 0.2s ease-in;
+    background-color: rgba(0, 0, 0, 0.20);
+}
+
+.radioOption{
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    float: left;
+    padding: 5px;
+    margin: 4px 0 0 10px;
+
+    font-size: 14px;
+    transition: color 0.4s ease-out;
+    color: var(--textGrey);
+}
+
+.radioOption:hover {
+    cursor: pointer;
+    transition: color 0.4s ease-out;
+    color: var(--textWhite);
+}
+
+.radioOption.selected {
+    transition: color 0.4s ease-out;
+    color: var(--textWhite);
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.boostHolder{
+    margin-right: 20px;
+    float: right;
+    display: flex;
+    flex: 1 0 50px;
+    color: var(--textGrey);
+    font-size: 14px;
+    padding: 5px 0 0 10px;
+}
+
+.boostHolder span{
+    margin-top: 5px;
+}
+
+.boost{
+    margin: 0px 5px;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    overflow:hidden; 
+    white-space: nowrap;  
+
+    font-size: 14px;
+    height: 12px;
+    font-weight: 500;
+    padding: 4px;
+    width: 10px;
+    color: var(--textGrey);
+    transition: color 0.2s ease-out, background-color 0.2s ease-out;
 }

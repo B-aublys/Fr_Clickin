@@ -68,7 +68,6 @@ function restartClicker(clicker){
 }
 
 function stopClickers(){
-	console.log("executed")
 	for (let [clickerNr, clicker]  of Object.entries(clickers)){
 		stopClicker(clickerNr)
 	}

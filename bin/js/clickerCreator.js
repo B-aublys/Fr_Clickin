@@ -12,7 +12,11 @@ function createClicker(id, relativeID, xpath){
 	  "xpath": xpath,
 	  "interval": 1,
 	  "intervalStep": "s",
-	  "active": false
+	  "active": false,
+	  "mouseDown": false,
+	  "click": true,
+	  "mouseUp": false,
+	  "boost": 1,
 	}
 
 	browser.storage.local.get(window.location.hostname, response => {

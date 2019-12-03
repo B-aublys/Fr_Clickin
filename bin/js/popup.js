@@ -34,7 +34,20 @@ function loadItems(){
                             <option ${item.intervalStep == "s"? "Selected='selected'":""} value="s">s</option>
                     </select>
                     </div>
-                    <div class="deleteButton elevatingInput"/>
+                    <div class="dropDownButton elevatingInput Closed"></div>
+                    <div class="deleteButton elevatingInput"></div>
+                    </div>
+                    <div class="dropDown">
+                        <div class="radioOption ${item.mouseDown? "selected": ""}" name="mouseDown">MouseDown</div>
+                        <div class="radioOption ${item.click? "selected": ""}" name="click">Click</div>
+                        <div class="radioOption ${item.mouseUp? "selected": ""}" name="mouseUp">MouseUp</div>
+
+                        <div class="boostHolder">
+                            <span>Boost:</span>
+                            <div contentEditable class="boost elevatingInput">
+                            ${item.boost}
+                            </div>
+                        </div>
                     </div>
                     </div>`
                     

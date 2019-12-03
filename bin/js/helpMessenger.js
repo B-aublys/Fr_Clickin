@@ -9,7 +9,6 @@ function writeAccordingMessage(){
         }
     }
 
-    console.log(currentClickers)
     if (currentClickers == 0){
         itemList.insertAdjacentHTML(position, helpMessage)
     }

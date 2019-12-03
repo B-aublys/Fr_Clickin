@@ -1,4 +1,5 @@
 import {getClickItemID} from "./getClickItemID"
+import { get } from "http"
 
 
 
@@ -19,30 +20,47 @@ class changeHandler{
     
             element.getElementsByClassName("startStop")[0].
                 addEventListener("click", clickEvent => this.switchClicker(clickEvent))
+            
+            // Option dropdown handler
+            element.getElementsByClassName("dropDownButton")[0].
+                addEventListener("click", clickEvent => this.optionDropdown(clickEvent))
+
+            // Dropdown option handler
+            element.getElementsByClassName("dropDown")[0].
+                addEventListener("click", clickEvent => this.dropdownEventHandler(clickEvent))
+            
+            element.getElementsByClassName("boost")[0].
+            addEventListener("blur", changeEvent => this.boostChange(changeEvent))
         }
 
         document.getElementById("parentStarter").
             addEventListener("click", () => this.startAllClickers())
 
-            document.getElementById("parentStopper").
+        document.getElementById("parentStopper").
             addEventListener("click", () => this.stopAllClickers())
+
     }
 
+
+    removeLetters(str){
+        let newValue = ""
+        for (let [charnr, char] of Object.entries(str)){
+            if("0123456789".indexOf(char) !== -1){
+                newValue += char
+            } 
+        }
+        return  newValue
+    }
 
 
     // delete all characters that are not numbers and change the interval
     changeInterval(changedEvent){
         let elemID = getClickItemID(changedEvent.target)
         let intervalValue = changedEvent.target.innerHTML.trim()
-        let newValue = "" 
 
-        for (let [charnr, char] of Object.entries(intervalValue)){
-            if("0123456789".indexOf(char) !== -1){
-                newValue += char
-            } 
-            changedEvent.target.innerHTML = newValue
-        }
-
+        let newValue = this.removeLetters(intervalValue)
+        changedEvent.target.innerHTML = newValue
+    
         this.writeChanges([{[elemID]: ["interval", parseInt(newValue)]}])
     }
 
@@ -120,7 +138,7 @@ class changeHandler{
     stopAllClickers(){
         let changeList = []
         for (let element of this.itemList){
-            let elemID = getClickItemID(element)
+            let elemID = getClickItemIDbu(element)
             if (element.className.indexOf("Active") != -1) {
                 changeList.push({[elemID]: ["active", false]})
                 //TODO: make this handled with callbacks
@@ -135,6 +153,47 @@ class changeHandler{
         classNames = classNames.split(" ")
         classNames.splice(-1, 0, "Active")
         return classNames.join(" ")
+    }
+
+
+    optionDropdown(clickEvent){
+        let arrowObject = clickEvent.target
+        let {parentElement, elemID} = getClickItemID(arrowObject, parent=true)
+        let dropdownOptions = parentElement.getElementsByClassName("dropDown")[0] 
+        // if the options are not open, open them
+        if (arrowObject.className.indexOf("Opened") == -1){
+            arrowObject.className +=" Opened"
+
+            // This gets the dropdown obejct and opens it
+            dropdownOptions.className += " Opened"
+        } else {    
+            // If they close them
+            arrowObject.className = arrowObject.className.replace(" Opened", " Closed")
+            dropdownOptions.className = dropdownOptions.className.replace(" Opened"," Closed")
+        }
+    }
+
+    dropdownEventHandler(clickEvent){
+        let clickedButton = clickEvent.target
+        let clickedOption = clickedButton.getAttribute("name")
+        let elemID = getClickItemID(clickedButton)
+
+        if (clickedOption){
+            if(clickedButton.className.indexOf("selected") == -1){
+                this.writeChanges([{[elemID]: [clickedOption, true]}])
+                clickedButton.className += " selected"
+            } else {
+                this.writeChanges([{[elemID]: [clickedOption, false]}])
+                clickedButton.className = clickedButton.className.replace(" selected", "")
+            }
+        }
+    }
+
+    boostChange(changeEvent){
+        let elemID = getClickItemID(changeEvent.target)
+        // TODO: add more filtering
+        let boost = this.removeLetters(changeEvent.target.innerHTML)
+        this.writeChanges([{[elemID]: ["boost", parseInt(boost)]}])
     }
 }
 
