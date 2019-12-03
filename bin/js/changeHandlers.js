@@ -43,48 +43,55 @@ class changeHandler{
             changedEvent.target.innerHTML = newValue
         }
 
-        this.writeChange({interval: parseInt(newValue)}, elemID)
+        this.writeChanges([{[elemID]: ["interval", parseInt(newValue)]}])
     }
 
     // use ms or s for the time interval*;
     changeIntervalStep(changeEvent){
         let elemID = getClickItemID(changeEvent.target)
-        console.log(elemID)
-        console.log(changeEvent.target.value)
-        this.writeChange({intervalStep: changeEvent.target.value}, elemID)
+        this.writeChanges([{[elemID]: ["intervalStep", changeEvent.target.value]}])
     }
 
     // Change the name of the clicker
     changeItemClassifier(changedEvent){
         let elemID = getClickItemID(changedEvent.target)
-        this.writeChange({name: changedEvent.target.innerHTML}, elemID)
+        this.writeChanges([{[elemID]: ["name", changedEvent.target.innerHTML]}])
     }
 
     // change = {key, value} of clicker in the local memory
     // and restart the changed clicker
-    writeChange(change, elemID){
-
+    // changeList:  {elemID: [changeKey: changeValue]}
+    writeChanges(changeList){
+        let clickersToRestart = []
         browser.storage.local.get(this.website, websiteData =>{
-            let dataObject = JSON.parse(websiteData[this.website])
-            dataObject[elemID][Object.keys(change)[0]] = change[Object.keys(change)[0]]
-            let clicker = {[elemID]: dataObject[elemID]}
-            browser.storage.local.set({[this.website]: JSON.stringify(dataObject)}, () => this.restartClicker(clicker))
-        })
+            let oldMemory = JSON.parse(websiteData[this.website])
+        for (let change of changeList){
+
+            // for the item based on ID change an attribute
+            let elemID = Object.keys(change)[0]
+            let actualChange = change[elemID] 
+            oldMemory[elemID][actualChange[0]] = actualChange[1]
+            clickersToRestart.push({[elemID]: oldMemory[elemID]})
+        }
+        browser.storage.local.set({[this.website]: JSON.stringify(oldMemory)}, () => {
+            // Restart all the clicker that have been changed
+            for(let clicker of clickersToRestart){
+                this.restartClicker(clicker)
+            }            
+        })})
+
     }
 
 
     // Change the state of the clicker ON/OFF
     switchClicker(clickEvent){
         let {parentElement, elemID} = getClickItemID(clickEvent.target, parent=true)
-        console.log("this is the parent")
-        console.log(parentElement)
-        // If clicker is  off
         if(parentElement.className.indexOf("Active") == -1){
-            this.writeChange({active: true}, elemID)
+            this.writeChanges([{[elemID]: ["active", true]}])
             parentElement.className = this.insertActive(parentElement.className)
         // If clicker is on
         } else {
-            this.writeChange({active: false}, elemID)
+            this.writeChanges([{[elemID]: ["active", false]}])
             parentElement.className = parentElement.className.replace("Active", "")
         }
     }
@@ -98,32 +105,29 @@ class changeHandler{
 
     // starts all the clickers
     startAllClickers(){
+        let changeList = []
         for (let element of this.itemList){
             let elemID = getClickItemID(element)
             if (element.className.indexOf("Active") == -1){
-                console.log(element)
-                console.log(elemID)
-                this.writeChange({active: true}, elemID)
+                changeList.push({[elemID]: ["active", true]})
                 element.className = this.insertActive(element.className)
-
             }
         }
+        this.writeChanges(changeList)
     }
 
     // stops all the clickers
     stopAllClickers(){
-        console.log("Stopping all")
+        let changeList = []
         for (let element of this.itemList){
             let elemID = getClickItemID(element)
-            console.log(element)
-            console.log(elemID)
-            console.log(element.className.indexOf("Active"))
             if (element.className.indexOf("Active") != -1) {
-                console.log("executing")
-                this.writeChange({active: false}, elemID)
+                changeList.push({[elemID]: ["active", false]})
+                //TODO: make this handled with callbacks
                 element.className = element.className.replace("Active", "")
             }
         }
+        this.writeChanges(changeList)
     }
 
     // inserts  "Active" before the last work of the string
