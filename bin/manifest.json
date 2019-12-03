@@ -1,6 +1,6 @@
 {
     "name": "Clickin",
-    "version": "1.0.1",
+    "version": "2.0.1",
     "description": "A simple to use autoclicker",
     "author": "Baublys",
     "permissions": ["storage", "contextMenus", "tabs"],
