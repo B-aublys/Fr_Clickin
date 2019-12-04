@@ -6,6 +6,13 @@ let lastClickerElement
 // array to store all the running clickers by their ID
 let clickers = {}
 
+//Events that we are going to be firing
+let clickAttributes = {bubbles:true, isTrusted: true}
+let Click = new Event("click", clickAttributes)
+let MouseDown = new Event("mouseDown", clickAttributes)
+let MouseUp = new Event("mouseUp", clickAttributes)
+
+
 function messageHandler(request, sender, sendResponse){
 	switch (request.ID){
 		case "selected":
@@ -105,10 +112,26 @@ function startClicker(clickerID, clickerObject){
 				console.log(xpathObjects)
 			}
 		}
+
+		// Choose what kind of events to fire of the object
 		if (elementToClick){
-			clickers[clickerID] = (setInterval(() => elementToClick.click(), parseInt(interval)))
+			createClicker(clickerID,
+				 elementToClick,
+				 clickerObject.click? true: false, 
+				 clickerObject.mouseDown? true: false,
+				 clickerObject.mouseUp? true: false,
+				 interval)
+				console.log("there is no problem")
 		}
 	}
+}
+
+function createClicker(clickerID, elementToClick, toClick, toMouseDown, toMouseUp, interval){
+	clickers[clickerID] = (setInterval(() => {
+		if(toMouseDown) {elementToClick.dispatchEvent(MouseDown)}
+		if(toMouseUp) {elementToClick.dispatchEvent(MouseUp)}
+		if(toClick) {elementToClick.dispatchEvent(Click)}
+		}, parseInt(interval)))
 }
 
 
