@@ -67,22 +67,25 @@ function getClickers(){
 }
 
 
-
 function restartClicker(clicker){
 	let clickerID = Object.keys(clicker)[0]
-	clearInterval(clickers[clickerID])
+	stopClicker(clickerID)
 	startClicker(clickerID, clicker[clickerID])
 }
 
 function stopClickers(){
-	for (let [clickerNr, clicker]  of Object.entries(clickers)){
+	for (let [clickerNr, clicker] of Object.entries(clickers[clickerID])){
 		stopClicker(clickerNr)
 	}
 }
 
-
 function stopClicker(clickerID){
-	clearInterval(clickers[clickerID])
+	if(clickers[clickerID]){
+		for(let [nr, clicker] of Object.entries(clickers[clickerID])){
+			clearInterval(clicker)
+		}
+	}
+	// clearInterval(clickers[clickerID])
 }
 
 
@@ -114,20 +117,27 @@ function startClicker(clickerID, clickerObject){
 		}
 
 		// Choose what kind of events to fire of the object
+
 		if (elementToClick){
-			createClicker(clickerID,
-				 elementToClick,
-				 clickerObject.click? true: false, 
-				 clickerObject.mouseDown? true: false,
-				 clickerObject.mouseUp? true: false,
-				 interval)
-				console.log("there is no problem")
+			// Probably not needed, but this is like a check to not start multiple clickers
+			stopClicker(clickerID)
+			clickers[clickerID] = []
+			for(let i = 0; i< clickerObject.boost ; i++){
+				console.log("starting", clickerObject.boost)
+				createClicker(clickerID,
+					 elementToClick,
+				 	clickerObject.click? true: false, 
+				 	clickerObject.mouseDown? true: false,
+				 	clickerObject.mouseUp? true: false,
+				 	interval)
+					console.log("there is no problem")
+			}
 		}
 	}
 }
 
 function createClicker(clickerID, elementToClick, toClick, toMouseDown, toMouseUp, interval){
-	clickers[clickerID] = (setInterval(() => {
+	clickers[clickerID].push(setInterval(() => {
 		if(toMouseDown) {elementToClick.dispatchEvent(MouseDown)}
 		if(toMouseUp) {elementToClick.dispatchEvent(MouseUp)}
 		if(toClick) {elementToClick.dispatchEvent(Click)}

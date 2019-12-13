@@ -138,7 +138,7 @@ class changeHandler{
     stopAllClickers(){
         let changeList = []
         for (let element of this.itemList){
-            let elemID = getClickItemIDbu(element)
+            let elemID = getClickItemID(element)
             if (element.className.indexOf("Active") != -1) {
                 changeList.push({[elemID]: ["active", false]})
                 //TODO: make this handled with callbacks
