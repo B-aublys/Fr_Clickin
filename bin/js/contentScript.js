@@ -20,10 +20,10 @@ function messageHandler(request, sender, sendResponse){
 			clickerCreator.createClicker(id, relativeID, xpath)
 			break
 		
+			// send back the URL of the currently opened site
 		case "website":
 			sendResponse({website: window.location.hostname})
 			break
-			// recopile
 		
 
 		// restarts 1 clicker
@@ -74,7 +74,10 @@ function restartClicker(clicker){
 }
 
 function stopClickers(){
-	for (let [clickerNr, clicker] of Object.entries(clickers[clickerID])){
+	console.log("executing")
+	console.log(clickers)
+	for (let [clickerNr, clicker] of Object.entries(clickers)){
+		console.log(clickerNr)
 		stopClicker(clickerNr)
 	}
 }
