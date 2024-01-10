@@ -1,5 +1,5 @@
 # Clicker
-Simple Chrome clicker extention
+Simple Firefox clicker extention
 
-[   Very old version ]
-[ under Construction ]
+I do believe it no longer works,
+Sadly I don't have time or want to maintain this addon, sorry.
